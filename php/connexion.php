@@ -1,13 +1,13 @@
 <?php
 
-$dbServername = "localhost"; // nom du serveur dans notre cas localhost
-$dbUsername = "root"; 	// nom d'utilisateur de mysql ou phpmyadmin dans notre cas
-$dbPassword = "";		// le mot de passe de mysql par défaut dans XAMPP est vide
-$dbName = "testing";	// le nom de la base de données
+$dbServername = "localhost"; // server name in our case localhost
+$dbUsername = "root"; 	// username of mysql or phpmyadmin in our case root
+$dbPassword = "";		// default mysql password in XAMPP is empty
+$dbName = "testing";	// the name of the database
 
 $connect=mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 
-// juste une petite instruction if pour vérifier s'il y a une erreur lors de la connexion à la base de données
+// just a little if statement to check if there is an error while connecting to the database
 if(!$connect){
 	die("Connection failed: ".mysqli_connect_error());
 }

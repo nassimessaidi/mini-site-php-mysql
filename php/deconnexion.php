@@ -3,6 +3,6 @@
 
 	session_start();
 
-	// nous détruisons la session puis redirige l'utilisateur vers la page de login.php
+	// we destroy the session then redirect the user to the login.php page
 	session_destroy();
 	header("location:login.php");

@@ -1,27 +1,27 @@
 <?php
 
-// vérifier si le bouton est enfoncé puis agir
+// check if the button is pressed then act
 if(isset($_POST['submit'])){
 
-	// importer la connexion DB à partir du fichier connexion.php
+	// import the DB connection from the connection.php file
 	require 'connexion.php';
 	
-	// obtenir les valeurs des champs du formulaire de connexion et les stocker dans des variables
+	// get the values of the fields of the login form and store them in variables
 
-	// mysqli_real_escape_string(para1,para2) : juste pour échapper à un caractère pour sécuriser notre base de données de SQL Injection, para1: nous collons le paramètre du fichier connexion.php appelé $ connect, para2: la valeur du champ
+	// mysqli_real_escape_string (para1, para2): just to escape a character to secure our SQL Injection database, para1: we paste the parameter from the connection.php file called $ connect, para2: the value of the field
 	
-	// strtolwer(): changer le nom d'utilisateur en minuscules parce que le nom d'utilisateur déposé ne doit pas être sensible à la casse, par exemple: si écrire nassim ou Nassim doit être la même chose, alors je le fais pour le comparer avec celui de notre base de données qui est lui-même en minuscules 
+	// strtolwer (): change username to lowercase because the deposited username must not be case sensitive, for example: if writing nassim or Nassim must be the same then I do it to compare it with that of our database which is itself in lowercase
 	
 	$username = mysqli_real_escape_string($connect,$_POST['username']);
-	$username=trim(strtolower($username));// trim pour supprimer tout espace indésirable au premier et au dernier des mots;
+	$username=trim(strtolower($username));// trim to remove any unwanted space from the first and last words;
 	$pwd = mysqli_real_escape_string($connect,$_POST['pwd']);
 	
-	// on vérifie d'abord si les champs sont vides
+	// we first check if the fields are empty
 	if(empty($username) || empty($pwd) ){
 		$error="Please entre the username & password to log in";
 	}else{
-		// le résumé de tous ces codes est:
-		// nous avons sélectionné la ligne qui contient le nom d'utilisateur cible, puis nous le comparons avec la même ligne, mais cette fois, nous voyons le mot de passe si vous pouvez vous connecter, sinon vous ne pouvez pas vous connecter
+		// the summary of all these codes is:
+		// we selected the row which contains the target username, then we compare it with the same row, but this time we see the password if you can log in, otherwise you cannot log in
 		$checkDBUsername="SELECT * FROM utilisateurs WHERE login='$username';";
 		$result=mysqli_query($connect,$checkDBUsername);
 		$resultCheck = mysqli_num_rows($result);
@@ -34,7 +34,7 @@ if(isset($_POST['submit'])){
 				}
 			}
 			if($foundUsername == $username && $foundPwd == $pwd ){
-				// lorsque le nom d'utilisateur et le mot de passe sont corrects, nous faisons une session prendre le nom du nom d'utilisateur afin de garantir l'unicité du nom de la session 
+				// when the username and password are correct, we make a session take the name of the username to ensure the uniqueness of the session name
 				session_start();
 				$_SESSION[$username]="ok";
 				header("location:session.php");
@@ -47,7 +47,7 @@ if(isset($_POST['submit'])){
 				}
 		
 	}
-	// nous avons fermé la connexion à DB
+	// we closed the connection to DB
 	mysqli_close($connect);
 }
  

@@ -1,8 +1,8 @@
 <?php 
 
-// le script de javascript nous redirige cette page juste si l'utilisateur veut vraiment supprimer son compte
-// nous prenons la valeur de la méthode GET que le code javascript nous a envoyé et utilisons del_id qui représente sur notre cas le nom d'utilisateur 
-// note: nous prenons le nom d'utilisateur juste parce qu'il est unique mais s'il n'était pas unique, nous pouvons prendre la clé primaire de notre base de données qui est l'identifiant
+// the javascript script redirects to this page just if the users really wants to delete their account
+// we take the value of the GET method that the javascript code sent us and use del_id which in our case represents the username
+// note: we take the username just because it is unique but if it was not unique we can take the primary key of our database which is the username
 require 'connexion.php';
 $get=$_GET['del_id'];
 $getusername="$get";

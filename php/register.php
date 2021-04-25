@@ -3,11 +3,11 @@
 if(isset($_POST['submit'])){
 	require 'connexion.php';
 	
-	// la plupart de ces lignes sont expliquées dans la page login.php donc s'il vous plaît si vous commencez par cette page, vous pouvez voir la page login.php pour une meilleure compréhension 
+	// most of these lines are explained in the login.php page so please if you start with this page you can see the login.php page for a better understanding
 
-	// [FACULTATIF]: ucfirst juste la majuscule de la première lettre pour une meilleure apparence, la même chose avec le nom juste dans ce cas toutes les lettres en majuscule
-	// J'ai changé le champ du nom d'utilisateur en minuscule pour que je puisse faire la compassion facilement avec le formulaire de connexion 
-	// trim pour supprimer tout espace indésirable au premier et au dernier des mots
+	// [OPTIONAL]: ucfirst just uppercase the first letter for better appearance, the same with the name just in this case all uppercase letters
+	// I changed the username field to lowercase so that I can do compassion easily with the login form 
+	// trim to remove any unwanted space from the first and last words
 	$fname = trim(ucfirst(mysqli_real_escape_string($connect,$_POST['first-name'])));
 	$lname = trim(strtoupper(mysqli_real_escape_string($connect,$_POST['last-name'])));
 	$username = trim(mysqli_real_escape_string($connect,$_POST['username']));
@@ -24,7 +24,7 @@ if(isset($_POST['submit'])){
 	}else{
 		if($pwd != $confirmpwd){
 			$error="Please type the correct password";
-		}else if(!preg_match("/^[a-zA-Z0-9]*$/", $username)){ // preg_match : c'est une fonction qui vérifie les caractères du nom d'utilisateur dans cet exemple, je n'autorise que les caractères suivants: 0-9 et a-z et A-Z si vous essayez de mettre un différent de la liste, il vous montrera un message d'erreur ci-dessous:
+		}else if(!preg_match("/^[a-zA-Z0-9]*$/", $username)){ // preg_match : this is a function which checks the characters of the username in this example, I only allow the following characters: 0-9 and az and AZ if you try to put a different one from the list it will show you a message error below:
 			$error="Username must contain just numbers and letters";
 		}
 		else{
@@ -33,13 +33,13 @@ if(isset($_POST['submit'])){
 			$resultCheck = mysqli_num_rows($result);
 			if($resultCheck > 0){
 				while ($row = mysqli_fetch_assoc($result)){
-					if($row['login'] == $username){ // nous recherchons un utilisateur existant dans notre base de données 
+					if($row['login'] == $username){ // we are looking for an existing user in our database
 						$notice="You already have an account Please Login";
 						break;
 					}
 				}
 			}else{
-				// On m'a déjà expliqué que dans le fichier login.php, c'est la même chose
+				// I was already explained that in the login.php file, it is the same thing
 				$sql=" INSERT INTO utilisateurs (date, nom, prenom, login, pass) VALUES (current_timestamp(), '$lname', '$fname', '$username', '$pwd'); ";
 
 				mysqli_query($connect,$sql);
@@ -90,7 +90,7 @@ include '../inc.php/html_body.php';
             <input type="password" name="pwd"  placeholder="Password">
 			<input type="password" name="confirm-pwd" placeholder="Confirm Password" />
 			
-			<!-- ceci juste pour un message d'erreur si les informations étaient incorrectes-->
+			<!-- this just for an error message if the information was incorrect-->
 			<?php if(!empty($error)) { ?>
 				<div id="error">
 				<p>
@@ -100,7 +100,7 @@ include '../inc.php/html_body.php';
 				</div>
 			<?php } ?>
 
-			<!-- c'est un message qui montre que toutes les informations sont valides et que l'utilisateur est enregistré avec succès-->
+			<!-- this is a message that shows that all information is valid and the user is registered successfully -->
 			<?php if(!empty($msg)) { ?>
 				<div id="msg">
 				<p>
@@ -110,7 +110,7 @@ include '../inc.php/html_body.php';
 					</p>
 				</div>
 			<?php } ?>
-			<!-- c'est pour un avis que cet utilisateur actuel a déjà existé. -->
+			<!-- it is for an opinion that this current user already existed. -->
 			<?php if(!empty($notice)) { ?>
 				<div id="notice">
 				<p>

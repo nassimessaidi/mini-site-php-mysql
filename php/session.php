@@ -1,16 +1,16 @@
 <?php
 	require 'connexion.php';
-  // nous commençons la session
+  // we start the session
 	session_start();
-	// nous sélectionnons tous les enregistrements de la table utilisateur
+	// we select all the records from the user table
 	$sql="SELECT * FROM utilisateurs";
 	$result=mysqli_query($connect,$sql);
 	$resultCheck = mysqli_num_rows($result);
 	if($resultCheck > 0){
 		while ($row = mysqli_fetch_assoc($result)){
 			$sessionName=$row['login'];
-			if(@$_SESSION[$sessionName]=="ok"){	// nous vérifions le nom de la session en recherchant dans notre base de données et trouver le bon, par exemple: si le nom d'utilisateur est nassim la session ressemble bien à: $ _SESSION ['nassim'] = "ok"
-			// nous prenons également certaines données de la base de données pour les afficher sur la page de l'utilisateur actuel comme le nom d'utilisateur, la date, le prénom, le nom de famille 
+			if(@$_SESSION[$sessionName]=="ok"){	// we check the session name by searching our database and find the correct one, for example: if the username is nassim the session looks like: $ _SESSION ['nassim'] = "ok"
+			// we also take some data from the database to display it on current user's page like username, date, first name, last name
 			$username=$sessionName;
 			$date=$row['date'];
 			$id=$row['id'];
@@ -18,7 +18,7 @@
 			$lname=$row['nom'];
 			}
 		}
-		if ($_SESSION[$username] != "ok") { // lorsque nous avons vérifié les noms d'utilisateur et que nous ne trouvons pas de session, cette page redirigera n'importe qui vers la page login.php
+		if ($_SESSION[$username] != "ok") { // when we have checked the usernames and cannot find a session this page will redirect anyone to the login.php page
 		header("location:login.php");
 		exit();
 	 }
@@ -39,7 +39,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="icon" href="../images/private.png" type="image/png" >
 	
-	<!-- nous faisons un titre du prénom de l'utilisateur -->
+	<!-- we make a title of the user's first name -->
     <title>Private Page of <?php echo $fname ?></title>
   </head>
   <body>
@@ -47,7 +47,7 @@
 		<div class="nav-bar">
     	<nav>
       <div class="header">
-        <!-- nous imprimons son nom et prénom -->
+        <!-- we print his name and first name -->
      <h1>Welcome to your Store <span id="name"><?php echo $fname . " ". $lname?></span></h1>	
     	</nav>
 		<ul class="logout">
@@ -75,7 +75,7 @@
 
       </div>
 		
-		<!-- nous avons affiché des informations de base sur l'utilisateur actuel, mais pas le mot de passe, car il n'est pas sécurisé de le faire. -->
+		<!-- we have displayed some basic information about the current user, but not the password, because it is not secure to do so. -->
       <div class="card">
         <div class="th1 th">
           <span class="thead"><h1>Username:</h1></span>
@@ -96,7 +96,7 @@
       </div>
     </section>
 
-		<!-- c'est juste une carte de magasinage aléatoire pour remplir le blanc et donner à la page plus belle -->
+		<!-- it's just a random shopping card to fill in the blank and make the page more beautiful -->
 <div class='row'>
   <div class='product--blue'>
     <div class='product_inner'>
