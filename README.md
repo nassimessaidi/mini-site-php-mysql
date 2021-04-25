@@ -1,6 +1,6 @@
 # Mini Site PHP/MYSQL
 
-First create a database named `testing`, or if you know what you do fell free to edit the file `/php/connexion.php`
+First create a database named `testing`, or if you know what you do feel free to edit the file `/php/connexion.php`
 
 Then Create this Table:
 
