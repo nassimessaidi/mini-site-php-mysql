@@ -1,0 +1,9 @@
+/** for reduce redondance of code  **/
+@import url("../css/marrakech.css");
+.pricing-box-bg-image {
+  background-image: url("../images/hotel3.jpg");
+  background-size: cover;
+  background-position: center center;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px #000;
+}
